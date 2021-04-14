@@ -2,18 +2,70 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        <title>{% block title %}{{app.request.attributes.get("_route") | capitalize}}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no"/>
+        <meta name="description" content="A Symfony Poll project">
+        <meta name="author" lang="fr" content="Symfony Poll">
+        <meta name="copyright" content="Symfony Poll">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Axentix -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.1.0/dist/css/axentix.min.css">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <style>
+            * {
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 400;
+            }
+        </style>
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="layout with-sidenav fixed-sidenav under-navbar">
+        <header>
+            <div class="navbar-fixed">
+                <nav class="navbar shadow-1 primary">
+                    <a href="#" target="_blank">Axentix</a>
+                    <div class="navbar-menu ml-auto">
+                        <a class="navbar-link" href="#">Home</a>
+                        <a class="navbar-link" href="#">User</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white">
+            <div class="sidenav-header">
+                <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
+            </div>
+            <a href="" class="sidenav-link active">Questions</a>
+            <a href="" class="sidenav-link">Answer</a>
+            <a href="" class="sidenav-link">Result</a>
+        </div>
+
+        <main class="m-3">
+            <!-- Code here the main content -->
+            <button data-target="example-sidenav"
+                    class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
+                Open sidenav
+            </button>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer class="footer primary d-flex justify-content-center">
+            Copyright © 2021 - Symfony Poll
+        </footer>
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- Axentix  -->
+        <script src="https://cdn.jsdelivr.net/npm/axentix@1.1.0/dist/js/axentix.min.js"></script>
     </body>
 </html>
