@@ -17,8 +17,60 @@ class Result
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ip;
+
+    /**
+     * @ORM\OneToOne(targetEntity=answer::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $answer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=user::class)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(string $ip): self
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getAnswer(): ?answer
+    {
+        return $this->answer;
+    }
+
+    public function setAnswer(answer $answer): self
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
