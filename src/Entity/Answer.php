@@ -23,7 +23,7 @@ class Answer
     private $label_choice;
 
     /**
-     * @ORM\ManyToOne(targetEntity=question::class)
+     * @ORM\ManyToOne(targetEntity=Question::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $question;

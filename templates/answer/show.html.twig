@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Answer{% endblock %}
+
+{% block body %}
+    <h1>Answer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ answer.id }}</td>
+            </tr>
+            <tr>
+                <th>Label_choice</th>
+                <td>{{ answer.labelChoice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('answer_index') }}">back to list</a>
+
+    <a href="{{ path('answer_edit', {'id': answer.id}) }}">edit</a>
+
+    {{ include('answer/_delete_form.html.twig') }}
+{% endblock %}

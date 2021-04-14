@@ -23,13 +23,13 @@ class Result
     private $ip;
 
     /**
-     * @ORM\OneToOne(targetEntity=answer::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Answer::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $answer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class)
+     * @ORM\ManyToOne(targetEntity=User::class)
      */
     private $user;
 
