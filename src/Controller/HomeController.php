@@ -11,6 +11,16 @@ class HomeController extends AbstractController
     public function index(): Response
     {
 
+        return $this->render('log/index.html.twig', [
+            'controller_name' => 'HomeController'
+            //object.property
+        ]);
+    }
+
+    #[Route('', name: '')]
+    public function isConnected(): Response
+    {
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController'
             //object.property
