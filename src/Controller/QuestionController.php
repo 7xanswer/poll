@@ -13,27 +13,32 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/question')]
 class QuestionController extends AbstractController
 {
+    
     #[Route('/', name: 'question_index', methods: ['GET'])]
     public function index(QuestionRepository $questionRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('question/index.html.twig', [
             'questions' => $questionRepository->findAll(),
         ]);
     }
 
+    
+
     #[Route('/new', name: 'question_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $question = new Question();
+        
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
             $entityManager->flush();
-
-            return $this->redirectToRoute('question_index');
+           
+            return $this->redirectToRoute('answer_new',array('id' => ($question->getId())),307);
         }
 
         return $this->render('question/new.html.twig', [

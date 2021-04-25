@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('', name: '')]
+    #[Route('/home', name: '')]
     public function index(): Response
     {
 
@@ -17,7 +17,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('', name: '')]
+    #[Route('/home', name: '')]
     public function isConnected(): Response
     {
 

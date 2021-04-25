@@ -3,6 +3,8 @@
 {% block title %}Question index{% endblock %}
 
 {% block body %}
+
+{% if is_granted('ROLE_USER') %}
     <h1>Question index</h1>
 
     <table class="table">
@@ -36,4 +38,14 @@
     </table>
 
     <a href="{{ path('question_new') }}">Create new</a>
+
+{% endif %}
+
+
+{% if is_granted('ROLE_USER') == false %}
+
+<h1>Veuillez vous connecter ici</h1>
+
+{% endif %}
+
 {% endblock %}

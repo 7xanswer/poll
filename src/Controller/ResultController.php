@@ -16,6 +16,7 @@ class ResultController extends AbstractController
     #[Route('/', name: 'result_index', methods: ['GET'])]
     public function index(ResultRepository $resultRepository): Response
     {
+        
         return $this->render('result/index.html.twig', [
             'results' => $resultRepository->findAll(),
         ]);

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
+
 use App\Form\AnswerType;
 use App\Repository\AnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,7 @@ class AnswerController extends AbstractController
     #[Route('/', name: 'answer_index', methods: ['GET'])]
     public function index(AnswerRepository $answerRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('answer/index.html.twig', [
             'answers' => $answerRepository->findAll(),
         ]);
@@ -24,6 +26,7 @@ class AnswerController extends AbstractController
     #[Route('/new', name: 'answer_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
+        
         $answer = new Answer();
         $form = $this->createForm(AnswerType::class, $answer);
         $form->handleRequest($request);
@@ -37,11 +40,13 @@ class AnswerController extends AbstractController
         }
 
         return $this->render('answer/new.html.twig', [
+            
             'answer' => $answer,
             'form' => $form->createView(),
         ]);
     }
 
+    
     #[Route('/{id}', name: 'answer_show', methods: ['GET'])]
     public function show(Answer $answer): Response
     {
