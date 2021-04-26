@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Ip</th>
+                <th>Question</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,7 +19,9 @@
             <tr>
                 <td>{{ result.id }}</td>
                 <td>{{ result.ip }}</td>
+                <td>dab</td>
                 <td>
+                    <a href="{{ path('result_new') }}">Repondre</a>
                     <a href="{{ path('result_show', {'id': result.id}) }}">show</a>
                     <a href="{{ path('result_edit', {'id': result.id}) }}">edit</a>
                 </td>

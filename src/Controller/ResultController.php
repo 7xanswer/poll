@@ -6,6 +6,7 @@ use App\Entity\Result;
 use App\Form\ResultType;
 use App\Repository\ResultRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Event\ConsoleEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +27,7 @@ class ResultController extends AbstractController
     public function new(Request $request): Response
     {
         $result = new Result();
-        $form = $this->createForm(ResultType::class, $result);
+        $form = $this->createForm(ResultType::class,$result);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
