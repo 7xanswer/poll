@@ -7,17 +7,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: '')]
+    #[Route('', name: '')]
     public function index(): Response
     {
-
-        return $this->render('log/index.html.twig', [
+        return $this->render('log/base_user.html.twig', [
             'controller_name' => 'HomeController'
             //object.property
         ]);
     }
 
-    #[Route('/home', name: '')]
+    #[Route('', name: '')]
     public function isConnected(): Response
     {
 
