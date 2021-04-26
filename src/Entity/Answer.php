@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnswerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,10 +25,19 @@ class Answer
     private $label_choice;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Question::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="answers")
      */
     private $question;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Result::class, mappedBy="answer")
+     */
+    private $results;
+
+    public function __construct()
+    {
+        $this->results = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -57,6 +68,35 @@ class Answer
         return $this;
     }
 
+    /**
+     * @return Collection|Result[]
+     */
+    public function getResults(): Collection
+    {
+        return $this->results;
+    }
+
+    public function addResult(Result $result): self
+    {
+        if (!$this->results->contains($result)) {
+            $this->results[] = $result;
+            $result->setAnswer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResult(Result $result): self
+    {
+        if ($this->results->removeElement($result)) {
+            // set the owning side to null (unless already changed)
+            if ($result->getAnswer() === $this) {
+                //$result->setAnswer(null); faite gaffe wallah
+            }
+        }
+
+        return $this;
+    }
     public function __toString()
     {
         return $this->label_choice;

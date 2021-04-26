@@ -23,8 +23,7 @@ class Result
     private $ip;
 
     /**
-     * @ORM\OneToOne(targetEntity=Answer::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Answer::class, inversedBy="results")
      */
     private $answer;
 
