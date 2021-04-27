@@ -7,10 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('', name: '')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('log/base_user.html.twig', [
+        return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController'
             //object.property
         ]);
@@ -19,7 +19,6 @@ class HomeController extends AbstractController
     #[Route('/home', name: '')]
     public function isConnected(): Response
     {
-
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController'
             //object.property
