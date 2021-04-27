@@ -16,7 +16,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('', name: '')]
+    #[Route('/home', name: '')]
     public function isConnected(): Response
     {
 

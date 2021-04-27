@@ -3,12 +3,13 @@
 {% block title %}Answer index{% endblock %}
 
 {% block body %}
-    <h1>Answer index</h1>
+    <h1>Les réponses possibles à vos questions</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Question</th>
                 <th>Label_choice</th>
                 <th>actions</th>
             </tr>
@@ -16,6 +17,7 @@
         <tbody>
         {% for answer in answers %}
             <tr>
+                <td>{{ answer.id }}</td>
                 <td>{{ answer.id }}</td>
                 <td>{{ answer.labelChoice }}</td>
                 <td>

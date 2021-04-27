@@ -17,6 +17,7 @@ class AnswerController extends AbstractController
     #[Route('/', name: 'answer_index', methods: ['GET'])]
     public function index(AnswerRepository $answerRepository): Response
     {
+        //$id = $entityManager=$this->getQuestion(); a faire en sorte de get les answer par user wallah
         $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('answer/index.html.twig', [
             'answers' => $answerRepository->findAll(),

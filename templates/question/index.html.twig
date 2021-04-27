@@ -5,14 +5,14 @@
 {% block body %}
 
 {% if is_granted('ROLE_USER') %}
-    <h1>Question index</h1>
+    <h1>Vos questions</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Label</th>
-                <th>Is_multiple</th>
+                <th>Réponse Multiple</th>
                 <th>Final_date</th>
                 <th>actions</th>
             </tr>
@@ -25,7 +25,7 @@
                 <td>{{ question.isMultiple ? 'Yes' : 'No' }}</td>
                 <td>{{ question.finalDate }}</td>
                 <td>
-                    <a href="{{ path('question_show', {'id': question.id}) }}">show</a>
+                    <a href="{{ path('question_show', {'id': question.id}) }}">Graph</a>
                     <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
                 </td>
             </tr>

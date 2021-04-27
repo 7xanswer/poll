@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Result;
+use App\Entity\Question;
+
 use App\Form\ResultType;
 use App\Repository\ResultRepository;
+use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Event\ConsoleEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,17 +18,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class ResultController extends AbstractController
 {
     #[Route('/', name: 'result_index', methods: ['GET'])]
-    public function index(ResultRepository $resultRepository): Response
+    public function index(ResultRepository $resultRepository,QuestionRepository $questionRepository): Response
     {
-        
+        $id = $entityManager=$this->getUser();
         return $this->render('result/index.html.twig', [
-            'results' => $resultRepository->findAll(),
+            'results' => $resultRepository->findByResultByUser($id),
+            //'info' => $resultRepository->findInfoResult($id),
+            'question' => $questionRepository->findQuestion(),
         ]);
     }
 
     #[Route('/new', name: 'result_new', methods: ['GET', 'POST'])]
+    
     public function new(Request $request): Response
     {
+        
         $result = new Result();
         $form = $this->createForm(ResultType::class,$result);
         $form->handleRequest($request);

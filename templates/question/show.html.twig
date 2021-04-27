@@ -16,19 +16,17 @@
                 <td>{{ question.label }}</td>
             </tr>
             <tr>
-                <th>Is_multiple</th>
-                <td>{{ question.isMultiple ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Final_date</th>
+                <th>Date de fin</th>
                 <td>{{ question.finalDate }}</td>
             </tr>
         </tbody>
     </table>
-
+    <H1>Graphique de batons</H1>
+    <br>
+    <p> J'ai pas composer sorry peut pas installé ton truc </p>
     <a href="{{ path('question_index') }}">back to list</a>
 
-    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
 
-    {{ include('question/_delete_form.html.twig') }}
+
+   
 {% endblock %}

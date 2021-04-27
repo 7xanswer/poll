@@ -36,15 +36,22 @@ class QuestionRepository extends ServiceEntityRepository
     }
     
 
-    /*
-    public function findOneBySomeField($value): ?Question
+    public function findInfoQuestion($id): ?array
     {
         return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('q.label, q.id')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->setMaxResults(10)
+            ->getResult()
         ;
     }
-    */
+    public function findQuestion(): ?array
+    {
+        return $this->createQueryBuilder('q')
+            ->select('q.label, q.id')
+            ->getQuery()
+            ->setMaxResults(10)
+            ->getResult()
+        ;
+    }
 }
