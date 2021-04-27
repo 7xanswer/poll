@@ -23,7 +23,7 @@ class QuestionController extends AbstractController
         $id = $entityManager=$this->getUser();
         $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('question/index.html.twig', [
-            'questions' => $questionRepository->findByQuestionByUser($id),
+            'questions' => $questionRepository->findByQuestionByUser2($id),
             'answer' => $answerRepository->findResultByQuestion($id),
 
         ]);

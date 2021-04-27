@@ -6,6 +6,7 @@ use App\Entity\Answer;
 
 use App\Form\AnswerType;
 use App\Repository\AnswerRepository;
+use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnswerController extends AbstractController
 {
     #[Route('/', name: 'answer_index', methods: ['GET'])]
-    public function index(AnswerRepository $answerRepository): Response
+    public function index(AnswerRepository $answerRepository,QuestionRepository $questionRepository): Response
     {
-        //$id = $entityManager=$this->getQuestion(); a faire en sorte de get les answer par user wallah
+        $id = $entityManager=$this->getUser();  
         $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('answer/index.html.twig', [
-            'answers' => $answerRepository->findAll(),
+            'question'  => $questionRepository->findInfoQuestion($id),
+            $questionIdUser  = $questionRepository->findByQuestionByUser($id),
+            'answers' => $answerRepository->findResultPerQuestionByUser($questionIdUser),
         ]);
     }
 

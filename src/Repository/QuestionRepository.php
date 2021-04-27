@@ -26,6 +26,7 @@ class QuestionRepository extends ServiceEntityRepository
     public function findByQuestionByUser($value)
     {
         return $this->createQueryBuilder('q')
+            ->select('q.id')
             ->andWhere('q.user = :val')
             ->setParameter('val', $value)
             ->orderBy('q.id', 'ASC')
@@ -34,14 +35,27 @@ class QuestionRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
-
-    public function findInfoQuestion($id): ?array
+    public function findByQuestionByUser2($value)
     {
         return $this->createQueryBuilder('q')
-            ->select('q.label, q.id')
-            ->getQuery()
+        ->andWhere('q.user = :val')
+        ->setParameter('val', $value)
+        ->orderBy('q.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
+    ;
+     }
+
+    public function findInfoQuestion($value): ?array
+    {
+        return $this->createQueryBuilder('q')
+            ->select('q.label,q.id')
+            ->andWhere('q.user = :val')
+            ->setParameter('val', $value)
+            ->orderBy('q.id', 'ASC')
             ->setMaxResults(10)
+            ->getQuery()
             ->getResult()
         ;
     }

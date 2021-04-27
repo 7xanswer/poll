@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Result;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +19,7 @@ class ResultType extends AbstractType
                 'empty_data' => $_SERVER['REMOTE_ADDR'],
             ])
             ->add('answer')
-            ->add('user')
+            ->add('user',HiddenType::class)
         ;
     }
 

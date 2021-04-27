@@ -46,6 +46,18 @@ class AnswerRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findResultPerQuestionByUser($value)
+    {
+        return $this->createQueryBuilder('q')
+       
+        ->andWhere('q.question in (:val)')
+        ->setParameter('val', $value)      
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
+    ;  
+    }
     /*
     public function findOneBySomeField($value): ?Answer
     {

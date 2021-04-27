@@ -3,21 +3,22 @@
 {% block title %}Answer index{% endblock %}
 
 {% block body %}
-    <h1>Les réponses possibles à vos questions</h1>
+    <h1>Les réponses possibles à votre question : </h1>
+     {% for question in question %}
 
-    <table class="table">
+    <h1>{{ question.label }}</h1>
+           <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Question</th>
                 <th>Label_choice</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for answer in answers %}
+        {% if question.label == answer.question %}
             <tr>
-                <td>{{ answer.id }}</td>
                 <td>{{ answer.id }}</td>
                 <td>{{ answer.labelChoice }}</td>
                 <td>
@@ -25,13 +26,14 @@
                     <a href="{{ path('answer_edit', {'id': answer.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+        
+        {% endif %}
         {% endfor %}
+
         </tbody>
-    </table>
+    </table>                                 
+    {% endfor %}
+    
 
     <a href="{{ path('answer_new') }}">Create new</a>
 {% endblock %}
