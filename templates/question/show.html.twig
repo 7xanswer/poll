@@ -2,6 +2,10 @@
 
 {% block title %}Question{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+{% endblock %}
+
 {% block body %}
     <div class="d-flex align-items-center justify-content-center min-vh-100 my-3">
         <div class="container">
@@ -36,11 +40,47 @@
                 <div class="col-md-12">
                     <div class="jumbotron mb-0 mt-3 bg-light">
                         <h1>Graphique</h1>
-                        <p>Un graphique détaillé sur les statistiques de votre question.</p>
+                          <canvas id="results" width="400" height="400"></canvas>
                     </div>
                 </div>
                 <!-- Graphique à implémenter -->
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js" integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg==" crossorigin="anonymous"></script>
+<script>
+
+const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+];
+
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'My First dataset',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: [0, 10, 5, 2, 20, 30, 45],
+  }]
+};
+
+const config = {
+  type: 'line',
+  data,
+  options: {}
+};
+let results = document.querySelector("#results");
+let graph = new Chart(results, config);
+
+
+</script>
 {% endblock %}
