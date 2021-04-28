@@ -7,6 +7,8 @@ use App\Form\QuestionType;
 use App\Repository\QuestionRepository;
 use App\Repository\AnswerRepository;
 
+use App\Repository\UserRepository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,15 +34,16 @@ class QuestionController extends AbstractController
     
 
     #[Route('/new', name: 'question_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, UserRepository $userRepository): Response
     {
         $id = $entityManager=$this->getUser();
-        $question = new Question($id);
+        $question = new Question();
         
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            $question->setUserId($userRepository->find($id));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
             $entityManager->flush();
@@ -63,13 +66,17 @@ class QuestionController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'question_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Question $question): Response
+    public function edit(Request $request, Question $question, UserRepository $userRepository): Response
     {
+        $id = $entityManager=$this->getUser();
         $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $question->setUserId($userRepository->find($id));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($question);
+            $entityManager->flush();
 
             return $this->redirectToRoute('question_index');
         }

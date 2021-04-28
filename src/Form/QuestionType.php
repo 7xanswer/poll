@@ -15,10 +15,6 @@ class QuestionType extends AbstractType
             ->add('label')
             ->add('is_multiple')
             ->add('final_date')
-            ->add('user',null,[
-                'required' => false,
-                'empty_data' => $options,
-            ])
         ;
     }
 

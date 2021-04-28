@@ -8,6 +8,7 @@ use App\Entity\Question;
 use App\Form\ResultType;
 use App\Repository\ResultRepository;
 use App\Repository\QuestionRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Event\ConsoleEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,14 +30,16 @@ class ResultController extends AbstractController
     }
 
     #[Route('/new', name: 'result_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, UserRepository $userRepository): Response
     {
-        
+        $id = $entityManager=$this->getUser();
         $result = new Result();
         $form = $this->createForm(ResultType::class,$result);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $result->setIp($request->getClientIp());
+            $result->setUser($userRepository->find($id));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($result);
             $entityManager->flush();
@@ -59,13 +62,18 @@ class ResultController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'result_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Result $result): Response
+    public function edit(Request $request, Result $result, UserRepository $userRepository): Response
     {
+        $id = $entityManager=$this->getUser();
         $form = $this->createForm(ResultType::class, $result);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $result->setIp($request->getClientIp());
+            $result->setUser($userRepository->find($id));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($result);
+            $entityManager->flush();
 
             return $this->redirectToRoute('result_index');
         }

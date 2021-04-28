@@ -14,12 +14,7 @@ class ResultType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ip',null,[
-                'required' => false,
-                'empty_data' => $_SERVER['REMOTE_ADDR'],
-            ])
             ->add('answer')
-            ->add('user')
         ;
     }
 
