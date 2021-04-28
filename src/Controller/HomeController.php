@@ -19,6 +19,7 @@ class HomeController extends AbstractController
     #[Route('/home', name: '')]
     public function isConnected(): Response
     {
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController'
             //object.property

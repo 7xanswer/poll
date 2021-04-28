@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}{{app.request.attributes.get("_route") | capitalize}}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no"/>
-        <meta name="description" content="A Symfony Poll project">
+        <meta name="description" content="Symfony Poll est une application web de sondages.">
         <meta name="author" lang="fr" content="Symfony Poll">
         <meta name="copyright" content="Symfony Poll">
 
@@ -23,40 +23,53 @@
                 font-family: 'Quicksand', sans-serif;
                 font-weight: 400;
             }
+
+            .navbar a {
+                text-decoration: none;
+            }
+
+            .navbar a:hover {
+                color: white;
+            }
+
+            ::-webkit-scrollbar {
+                width: 3px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: black;
+            }
         </style>
     </head>
     <body class="layout with-sidenav fixed-sidenav under-navbar">
         <header>
             <div class="navbar-fixed">
-                <nav class="navbar shadow-1 primary">
-                    <a href="#" target="_blank">Axentix</a>
+                <nav class="navbar shadow-1 text-white bg-primary">
+                    <a href="{{ path('app_home')}}">Symfony Poll</a>
                     <div class="navbar-menu ml-auto">
-                        <a href="/home" class="navbar-link" href="#">Home</a>
-                        <a href="/user" class="navbar-link" href="#">User</a>
+                        <a href="{{ path('app_home') }}" class="navbar-link">Accueil</a>
+                        <a href="{{ path('user_index') }}" class="navbar-link">Profil</a>
+                        <a href="https://github.com/7xanswer/poll" target="_blank" class="navbar-link">GitHub</a>
+                        <a href="#" data-target="example-sidenav" class="navbar-link sidenav-trigger hide-md-up">Menu</a>
                     </div>
                 </nav>
             </div>
         </header>
 
-        <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white">
+        <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white bg-light">
             <div class="sidenav-header">
-                <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
+
             </div>
-            <a href="/question" class="sidenav-link">Questions</a>
-            <a href="/answer" class="sidenav-link">Answer</a>
-            <a href="/result" class="sidenav-link">Result</a>
+            <a href="{{ path('question_index') }}" class="sidenav-link">Questions</a>
+            <a href="{{ path('answer_index') }}" class="sidenav-link">Réponses</a>
+            <a href="{{ path('result_index') }}" class="sidenav-link">Résultats</a>
         </div>
 
-        <main class="m-3">  
-            <!-- Code here the main content -->
-            <button data-target="example-sidenav"
-                    class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
-                Open sidenav
-            </button>
+        <main>
             {% block body %}{% endblock %}
         </main>
 
-        <footer class="footer primary d-flex justify-content-center">
+        <footer class="footer bg-light d-flex justify-content-center">
             Copyright © 2021 - Symfony Poll
         </footer>
         <!-- JQuery -->

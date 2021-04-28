@@ -3,24 +3,33 @@
 {% block title %}Answer{% endblock %}
 
 {% block body %}
-    <h1>Answer</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ answer.id }}</td>
-            </tr>
-            <tr>
-                <th>Label_choice</th>
-                <td>{{ answer.labelChoice }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('answer_index') }}">back to list</a>
-
-    <a href="{{ path('answer_edit', {'id': answer.id}) }}">edit</a>
-
-    {{ include('answer/_delete_form.html.twig') }}
+    <div class="d-flex align-items-center justify-content-center min-vh-100 my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ path('answer_index') }}">
+                        <button class="btn btn-primary mb-3" type="button">
+                            Retour aux réponses
+                        </button>
+                    </a>
+                    <div class="jumbotron mb-0">
+                        <h1>Détails</h1>
+                        <p>Les détails de la réponse que vous avez proposée.</p>
+                    </div>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ answer.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Label_choice</th>
+                            <td>{{ answer.labelChoice }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

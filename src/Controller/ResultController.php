@@ -29,7 +29,6 @@ class ResultController extends AbstractController
     }
 
     #[Route('/new', name: 'result_new', methods: ['GET', 'POST'])]
-    
     public function new(Request $request): Response
     {
         

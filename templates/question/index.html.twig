@@ -1,51 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Question index{% endblock %}
+{% block title %}Questions{% endblock %}
 
 {% block body %}
 
-{% if is_granted('ROLE_USER') %}
-    <h1>Vos questions</h1>
+    {% if is_granted('ROLE_USER') %}
+        <div class="d-flex align-items-center min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="jumbotron">
+                            <h1>Vos questions</h1>
+                            <p>Retrouvez l'ensemble des questions que vous avez posées à la communauté.</p>
+                            <a href="{{ path('question_new') }}">
+                                <button type="button" class="btn btn-primary">Nouvelle question</button>
+                            </a>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Label</th>
+                                <th>Réponse Multiple</th>
+                                <th>Final_date</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for question in questions %}
+                                <tr>
+                                    <td>{{ question.id }}</td>
+                                    <td>{{ question.label }}</td>
+                                    <td>{{ question.isMultiple ? 'Yes' : 'No' }}</td>
+                                    <td>{{ question.finalDate }}</td>
+                                    <td>
+                                        <a href="{{ path('question_show', {'id': question.id}) }}">Show</a>
+                                        <a href="{{ path('question_edit', {'id': question.id}) }}">Edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>Réponse Multiple</th>
-                <th>Final_date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for question in questions %}
-            <tr>
-                <td>{{ question.id }}</td>
-                <td>{{ question.label }}</td>
-                <td>{{ question.isMultiple ? 'Yes' : 'No' }}</td>
-                <td>{{ question.finalDate }}</td>
-                <td>
-                    <a href="{{ path('question_show', {'id': question.id}) }}">Graph</a>
-                    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('question_new') }}">Create new</a>
-
-{% endif %}
-
-
-{% if is_granted('ROLE_USER') == false %}
-
-<h1>Veuillez vous connecter ici</h1>
-
-{% endif %}
+    {% if is_granted('ROLE_USER') == false %}
+        <div class="alert alert-primary">
+            Veuillez vous connecter ici
+        </div>
+    {% endif %}
 
 {% endblock %}

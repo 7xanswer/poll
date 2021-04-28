@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
-{% block title %}{% endblock %}
+{% block title %}Accueil{% endblock %}
 {% block body %}
-<h1>tu souhaite t'enregistrer mon garcon</h1>
-<a href="/register">clique ici</a>
-<h1>tu possède un compte bogoss</h1>
-<a href="/login">clique ici</a>
-
+    <div class="container d-flex align-items-center h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Symfony Poll</h1>
+                <p>Symfony Poll est une application web de sondages.
+                    <br>
+                    Publiez vos premières questions ou répondez au sondages existants.
+                </p>
+                <a href="{{ path('app_register') }}">
+                    <button type="button" class="btn btn-primary">Je m'enregistre</button>
+                </a>
+                <a href="{{ path('app_login') }}">
+                    <button type="button" class="btn btn-secondary">Je me connecte</button>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

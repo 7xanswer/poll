@@ -3,37 +3,49 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
-{% endblock %}
+<div class="d-flex align-items-center h-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="jumbotron w-100 h-100 m-0">
+                    <h1>Votre profil</h1>
+                    <p>Les informations relatives à votre compte Symfony Poll.</p>
+                    <a href="{{ path('question_new') }}">
+                        <button type="button" class="btn btn-primary">Retour aux sondages</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                {% for user in users %}
+                    <div class="card w-100 h-100 m-0" style="width: 18rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">Vous êtes top n° {{ user.id }}</h4>
+                            <h6 class="card-subtitle mt-1 mb-3">Informations :</h6>
+                            <p class="card-text">
+                                E-mail : {{ user.email }}
+                                <br />
+                                Secret password : {{ user.password|length > 30 ? user.password|slice(0, 30) ~ '...' : user.password }}
+                                <br />
+                                Status : {{ (user.roles ? user.roles|json_encode : '')|slice(7, 4)}}
+                                <br />
+                            </p>
+                            <a href="{{ path('user_show', {'id': user.id}) }}" class="card-link">
+                                <button type="button" class="btn btn-primary">Show</button>
+                            </a>
+                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="card-link">
+                                <button type="button" class="btn btn-secondary">Edit</button>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">no records found</h5>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!--<a href="{{ path('user_new') }}">Create new</a>-->
+    {% endblock %}

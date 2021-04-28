@@ -3,24 +3,33 @@
 {% block title %}Result{% endblock %}
 
 {% block body %}
-    <h1>Result</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ result.id }}</td>
-            </tr>
-            <tr>
-                <th>Ip</th>
-                <td>{{ result.ip }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('result_index') }}">back to list</a>
-
-    <a href="{{ path('result_edit', {'id': result.id}) }}">edit</a>
-
-    {{ include('result/_delete_form.html.twig') }}
+    <div class="d-flex align-items-center justify-content-center min-vh-100 my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ path('result_index') }}">
+                        <button class="btn btn-primary mb-3" type="button">
+                            Retour aux résultats
+                        </button>
+                    </a>
+                    <div class="jumbotron mb-0">
+                        <h1>Détails</h1>
+                        <p>Les détails du résultat de votre sondage.</p>
+                    </div>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ result.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ip</th>
+                            <td>{{ result.ip }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

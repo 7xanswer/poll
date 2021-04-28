@@ -2,9 +2,16 @@
 {% block title %}New Question{% endblock %}
 
 {% block body %}
-    <h1>Create new Question</h1>
-
-    {{ include('question/_form.html.twig') }}
-
-    <a href="{{ path('question_index') }}">back to list</a>
+    <div class="container d-flex align-items-center h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('question_index') }}">
+                    Retour aux questions
+                </a>
+                <h1>Nouvelle question</h1>
+                <p>Surprenez la communauté avec votre originalité.</p>
+                {{ include('question/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -3,60 +3,73 @@
 {% block title %}Result index{% endblock %}
 
 {% block body %}
-    <h1>Vos réponse</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Ip</th>
-                <th>Question</th>
-                <th>Reponse</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for result in results %}
-            <tr>
-                <td>{{ result.id }}</td>
-                <td>{{ result.ip }}</td>
-                <td>a def</td>
-                <td>a def</td>
-                <td>
-                    <a href="{{ path('result_show', {'id': result.id}) }}">show</a>
-                    <a href="{{ path('result_edit', {'id': result.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <h1>Répondre à une question </h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Question</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for question in question %}
-            <tr>
-                <td>{{question.label}}</td>
-                <td>
-                    <a href="{{ path('result_new', {'id': question.id}) }}">Repondre</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="d-flex align-items-center justify-content-center min-vh-100 my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="jumbotron mb-0">
+                        <h1>Vos réponses aux sondages</h1>
+                        <p>Retrouvez l'ensemble les réponses des sondages auxquels vous avez répondus.</p>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Ip</th>
+                            <th>Question</th>
+                            <th>Reponse</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in results %}
+                            <tr>
+                                <td>{{ result.id }}</td>
+                                <td>{{ result.ip }}</td>
+                                <td>a def</td>
+                                <td>a def</td>
+                                <td>
+                                    <a href="{{ path('result_show', {'id': result.id}) }}">Show</a>
+                                    <a href="{{ path('result_edit', {'id': result.id}) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <div class="jumbotron mb-0 mt-3 bg-light">
+                        <h1>Les sondages de la communauté</h1>
+                        <p>Contribuez à Symfony Poll en répondant aux autres utilisateurs.</p>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for question in question %}
+                            <tr>
+                                <td>{{question.label}}</td>
+                                <td>
+                                    <a href="{{ path('result_new', {'id': question.id}) }}">Répondre</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

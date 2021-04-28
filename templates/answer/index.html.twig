@@ -1,39 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Answer index{% endblock %}
+{% block title %}Réponses{% endblock %}
 
 {% block body %}
-    <h1>Les réponses possibles à votre question : </h1>
-     {% for question in question %}
-
-    <h1>{{ question.label }}</h1>
-           <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label_choice</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for answer in answers %}
-        {% if question.label == answer.question %}
-            <tr>
-                <td>{{ answer.id }}</td>
-                <td>{{ answer.labelChoice }}</td>
-                <td>
-                    <a href="{{ path('answer_show', {'id': answer.id}) }}">show</a>
-                    <a href="{{ path('answer_edit', {'id': answer.id}) }}">edit</a>
-                </td>
-            </tr>
-        
-        {% endif %}
-        {% endfor %}
-
-        </tbody>
-    </table>                                 
-    {% endfor %}
-    
-
-    <a href="{{ path('answer_new') }}">Create new</a>
+    <div class="d-flex align-items-center justify-content-center min-vh-100 my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="jumbotron">
+                        <h1>Vos réponses proposées</h1>
+                        <p>Retrouvez l'ensemble des réponses que vous avez proposées.</p>
+                        <a href="{{ path('answer_new') }}">
+                            <button type="button" class="btn btn-primary">Nouvelle réponse</button>
+                        </a>
+                    </div>
+                    {% for question in question %}
+                        <div class="pb-3">
+                            <div class="col-md-6 p-0">
+                                <div class="alert alert-primary mb-0" role="alert">{{ question.label }}</div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Label_choice</th>
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for answer in answers %}
+                                    {% if question.label == answer.question %}
+                                        <tr>
+                                            <td>{{ answer.id }}</td>
+                                            <td>{{ answer.labelChoice }}</td>
+                                            <td>
+                                                <a href="{{ path('answer_show', {'id': answer.id}) }}">Show</a>
+                                                <a href="{{ path('answer_edit', {'id': answer.id}) }}">Edit</a>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -3,9 +3,16 @@
 {% block title %}New Result{% endblock %}
 
 {% block body %}
-    <h1>Create new Result for </h1>
-
-    {{ include('result/_form.html.twig') }}
-
-    <a href="{{ path('result_index') }}">back to list</a>
+    <div class="container d-flex align-items-center h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('result_index') }}">
+                    Retour aux questions
+                </a>
+                <h1>Répondre au sondage</h1>
+                <p>Contribuez à Symphony Poll en répondant aux sondages.</p>
+                {{ include('result/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -19,7 +19,7 @@ class ResultType extends AbstractType
                 'empty_data' => $_SERVER['REMOTE_ADDR'],
             ])
             ->add('answer')
-            ->add('user',HiddenType::class)
+            ->add('user')
         ;
     }
 

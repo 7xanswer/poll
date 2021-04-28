@@ -3,30 +3,44 @@
 {% block title %}Question{% endblock %}
 
 {% block body %}
-    <h1>Question</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ question.id }}</td>
-            </tr>
-            <tr>
-                <th>Label</th>
-                <td>{{ question.label }}</td>
-            </tr>
-            <tr>
-                <th>Date de fin</th>
-                <td>{{ question.finalDate }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <H1>Graphique de batons</H1>
-    <br>
-    <p> J'ai pas composer sorry peut pas installé ton truc </p>
-    <a href="{{ path('question_index') }}">back to list</a>
-
-
-
-   
+    <div class="d-flex align-items-center justify-content-center min-vh-100 my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ path('question_index') }}">
+                        <button class="btn btn-primary mb-3" type="button">
+                            Retour aux questions
+                        </button>
+                    </a>
+                    <div class="jumbotron mb-0">
+                        <h1>Détails</h1>
+                        <p>Les détails de la question que vous avez posée.</p>
+                    </div>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ question.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Label</th>
+                            <td>{{ question.label }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de fin</th>
+                            <td>{{ question.finalDate }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <div class="jumbotron mb-0 mt-3 bg-light">
+                        <h1>Graphique</h1>
+                        <p>Un graphique détaillé sur les statistiques de votre question.</p>
+                    </div>
+                </div>
+                <!-- Graphique à implémenter -->
+            </div>
+        </div>
+    </div>
 {% endblock %}

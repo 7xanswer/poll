@@ -3,11 +3,17 @@
 {% block title %}Edit Result{% endblock %}
 
 {% block body %}
-    <h1>Edit Result</h1>
-
-    {{ include('result/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('result_index') }}">back to list</a>
-
-    {{ include('result/_delete_form.html.twig') }}
+    <div class="container d-flex align-items-center h-100">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('result_index') }}">Retour aux résultats</a>
+                <h1>Modifier</h1>
+                <div class="mb-3">
+                    <p class="m-0">Mettez à jour les informations de votre sondage.</p>
+                </div>
+                {{ include('result/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('result/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
